@@ -22,15 +22,10 @@ class CombineTest extends path.FunSpec with Matchers {
     }
   }
 
-
   describe("Compute combinations and subsets") {
 
     it("combinations n C k") {
       combinationsCk(Set(1, 2, 3), 2) shouldEqual Set(Set(1, 2), Set(1, 3), Set(2, 3))
-    }
-
-    it("combinations with generic types") {
-
     }
 
     it("combinations of all subsets") {
@@ -40,9 +35,21 @@ class CombineTest extends path.FunSpec with Matchers {
     it("combinations of all subsets with a longer set") {
       combinations(Set(1, 2, 3)) shouldEqual Set(Set(), Set(1), Set(2), Set(3), Set(1, 2), Set(2, 3), Set(1, 3), Set(1, 2, 3))
     }
+
+    it("combinations alternative implemenration of all subsets with a longer set") {
+      combinationsAlt(Set(1, 2, 3)) shouldEqual Set(Set(), Set(1), Set(2), Set(3), Set(1, 2), Set(2, 3), Set(1, 3), Set(1, 2, 3))
+    }
+
+    it("count possible combinations") {
+      combinationsCount(3, 2) shouldEqual 3
+    }
+
+    it("a more complex count") {
+      combinationsCount(6, 3) shouldEqual combinationsCk(Set(1, 2, 3, 4, 5, 6), 3).size
+    }
   }
 
-  describe("zip permutations with variable size, variable length lists") {
+  describe("zip-like-sorta permutations with variable size, variable length lists") {
 
     it("a simple case") {
       Combine.variableZip(List(List(1), List(2, 3))) shouldEqual List(List(1, 2), List(1, 3))
